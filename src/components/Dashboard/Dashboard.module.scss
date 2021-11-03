@@ -1,0 +1,14 @@
+
+.Dashboard {
+  display: flex;
+  flex-direction: row;
+}
+
+.LineChart {
+
+}
+@media (max-width: 992px) {
+  .Dashboard {
+    flex-direction: column;
+  }
+}
