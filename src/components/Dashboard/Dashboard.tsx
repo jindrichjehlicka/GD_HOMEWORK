@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
                 />
             </div>
             <div className={styles.CalculationOverview}>
-                <CalculationOverview />
+                <CalculationOverview filters={dateFilterInfo?.filter ? [dateFilterInfo?.filter] : []} />
             </div>
 
 

@@ -8,13 +8,20 @@ interface StatusLoaderProps<T, U, S> {
     render: (data: U) => ReactNode;
     error?: S;
     status: "success" | "error" | "loading" | "pending";
+    renderError?:(data: S) => ReactNode
 }
 
-function StatusLoader<T, U, S>({ data, error, status, render }: StatusLoaderProps<T, U, S>): JSX.Element {
+function StatusLoader<T, U, S>({ data, error, status, render,renderError }: StatusLoaderProps<T, U, S>): JSX.Element {
     if (status === "loading") {
         return <LoadingComponent />;
     }
-    if (status === "error") {
+
+    if (status === "error" && renderError) {
+        return (renderError as unknown as (renderErrorData: S) => JSX.Element)(error as S);
+
+    }
+
+    if (status === "error" && !renderError) {
         //Eventually there should be a dynamic error message
         return <ErrorComponent
             message="There was an error getting your execution"
