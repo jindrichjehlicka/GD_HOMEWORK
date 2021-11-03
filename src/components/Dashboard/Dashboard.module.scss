@@ -1,12 +1,23 @@
+@import "../../theme.scss";
 
 .Dashboard {
   display: flex;
   flex-direction: row;
+  margin: $spacing ;
 }
 
 .LineChart {
-
+  flex: 3;
+  height: 300px;
 }
+
+.CalculationOverview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 @media (max-width: 992px) {
   .Dashboard {
     flex-direction: column;
