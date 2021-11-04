@@ -19,13 +19,13 @@ const defaultLocale = "en-US";
 
 //JSX.Element could be used instead of React.FC. This would prevent specifying FilterBarProps twice.
 const FilterBar: React.FC<FilterBarProps> = ({ onDateFilterChange }: FilterBarProps) => {
-    const [state, setState] = useState<any>({
+    const [filterState, setFilterState] = useState<{ selectedFilterOption: DateFilterOption | undefined, excludeCurrentPeriod: boolean }>({
         selectedFilterOption: defaultDateFilterOptions.allTime,
         excludeCurrentPeriod: false,
     });
 
     const onApply = (selectedFilterOption: DateFilterOption, excludeCurrentPeriod: boolean) => {
-        setState({
+        setFilterState({
             selectedFilterOption,
             excludeCurrentPeriod,
         });
@@ -33,21 +33,25 @@ const FilterBar: React.FC<FilterBarProps> = ({ onDateFilterChange }: FilterBarPr
 
     //This logic cannot be in onApply, since it would not send the default state to the parent component.
     useEffect(() => {
-        const filter = DateFilterHelpers.mapOptionToAfm(
-            state.selectedFilterOption,
-            DateDatasets.Date.ref,
-            state.excludeCurrentPeriod,
-        );
-        const title = DateFilterHelpers.getDateFilterTitle(state.selectedFilterOption, defaultLocale);
-        onDateFilterChange({ filter, title });
-    }, [onDateFilterChange, state]);
+        const {selectedFilterOption,excludeCurrentPeriod} = filterState;
+        if(selectedFilterOption) {
+            const filter = DateFilterHelpers.mapOptionToAfm(
+                selectedFilterOption,
+                DateDatasets.Date.ref,
+                excludeCurrentPeriod,
+            );
+            const title = DateFilterHelpers.getDateFilterTitle(selectedFilterOption, defaultLocale);
+            onDateFilterChange({ filter, title });
+        }
+
+    }, [onDateFilterChange, filterState]);
 
     return <>
         {/* I don't think that the imported constant defaultDateFilterOptions should be used in here as it also offers filtering by days, while the view is based on months*/}
         <DateFilter
             filterOptions={defaultDateFilterOptions}
-            excludeCurrentPeriod={state.excludeCurrentPeriod}
-            selectedFilterOption={state.selectedFilterOption}
+            excludeCurrentPeriod={filterState.excludeCurrentPeriod}
+            selectedFilterOption={filterState.selectedFilterOption}
             availableGranularities={availableGranularity}
             onApply={onApply} />
     </>;

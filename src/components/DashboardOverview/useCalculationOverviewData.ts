@@ -16,6 +16,7 @@ const useCalculationOverviewData = (): UseCalculationOverviewData => {
         return slices?.map((slice) => {
             return {
                 label: slice.sliceTitles()[0],
+                //rawValue could be used, however formatted also returns currency
                 values:slice.dataPoints().map(({formattedValue}) => formattedValue() || '')
             };
         });
