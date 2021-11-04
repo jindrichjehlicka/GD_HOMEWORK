@@ -14,7 +14,7 @@ const availableGranularity: DateFilterGranularity[] = [
     "GDC.time.month",
 ];
 
-//This should be dynamic when internationalization is implemented
+//This should be dynamic if internationalization is ever implemented
 const defaultLocale = "en-US";
 
 //JSX.Element could be used instead of React.FC. This would prevent specifying FilterBarProps twice.

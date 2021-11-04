@@ -4,18 +4,14 @@ import CalculationOverview from "./CalculationOverview";
 import styles from "./Dashboard.module.scss";
 import { DateDatasets, Product, Revenue } from "../../md/full";
 import FilterBar, { DateFilterInfo } from "./FilterBar";
+import dashboardStrings from "./dashboardStrings";
 
 
 const Dashboard: React.FC = () => {
     const [dateFilterInfo, setDateFilterInfo] = useState<DateFilterInfo>();
     return <>
-        <div>
-            <h1>My dashboard {dateFilterInfo && ` - ${dateFilterInfo.title}`}</h1>
-        </div>
-        <div>
-            <FilterBar onDateFilterChange={setDateFilterInfo} />
-        </div>
-
+        <h1>{`${dashboardStrings.TITLE} ${dateFilterInfo && ` - ${dateFilterInfo.title}`}`} </h1>
+        <FilterBar onDateFilterChange={setDateFilterInfo} />
         <div className={styles.Dashboard}>
             <div className={styles.LineChart}>
                 <LineChart
@@ -28,11 +24,7 @@ const Dashboard: React.FC = () => {
             <div className={styles.CalculationOverview}>
                 <CalculationOverview filters={dateFilterInfo?.filter ? [dateFilterInfo?.filter] : []} />
             </div>
-
-
         </div>
-
-
     </>;
 };
 export default Dashboard;

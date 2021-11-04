@@ -7,6 +7,7 @@ import styles from "./CalculationOverview.module.scss";
 import { IDateFilter } from "@gooddata/sdk-model";
 import useCalculationOverviewData from "./useCalculationOverviewData";
 import useCalculationResult, { ResultType } from "./useCalculationResult";
+import calculationOverviewStrings from "./calculationOverviewStrings";
 
 interface CalculationOverviewProps {
     filters: IDateFilter[];
@@ -15,9 +16,9 @@ interface CalculationOverviewProps {
 type SelectOption = { value: string, label: string }
 
 const options = [
-    { value: "maximum_revenue", label: "Maximum Revenue" },
-    { value: "minimum_revenue", label: "Minimum Revenue" },
-    { value: "median", label: "Median" },
+    { value: "maximum_revenue", label: calculationOverviewStrings.MINIMUM_REVENUE },
+    { value: "minimum_revenue", label: calculationOverviewStrings.MINIMUM_REVENUE },
+    { value: "median", label: calculationOverviewStrings.MEDIAN },
 ];
 const CalculationOverview: React.FC<CalculationOverviewProps> = ({ filters }: CalculationOverviewProps) => {
     const { getMappedData } = useCalculationOverviewData();
@@ -31,29 +32,26 @@ const CalculationOverview: React.FC<CalculationOverviewProps> = ({ filters }: Ca
     });
     const [selectedOption, setSelectedOption] = useState<SingleValue<SelectOption>>({
         value: "maximum_revenue",
-        label: "Maximum Revenue",
+        label: calculationOverviewStrings.MEDIAN,
     });
 
     return <StatusLoader
         data={result}
         error={error}
         status={status}
-        renderError={() => {
-            return <></>;
-        }}
+        renderError={() => <></>}
         render={(data: DataViewFacade) => {
             const mappedData = getMappedData(data);
             const result = getResult(selectedOption?.value as ResultType || "maximum_revenue", mappedData);
-            console.log(mappedData);
-            return <>
-                <h2>{`$${result}`}</h2>
+            return <div className={styles.overview}>
+                <h2 className={styles.title}>{`$${result}`}</h2>
                 <Select
                     value={selectedOption}
                     onChange={setSelectedOption}
                     options={options}
                     className={styles.Select}
                 />
-            </>;
+            </div>;
         }} />;
 
 

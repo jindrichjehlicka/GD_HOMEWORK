@@ -1,5 +1,18 @@
+@import "../../theme.scss";
 
+.overview {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .Select {
+  padding: $spacing;
   min-width: 300px;
 }
+.title{
+  padding: $spacing;
+  margin: 0;
+}
+
 

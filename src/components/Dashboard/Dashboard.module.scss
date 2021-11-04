@@ -3,19 +3,20 @@
 .Dashboard {
   display: flex;
   flex-direction: row;
-  margin: $spacing ;
+  margin: $spacing 0;
+  justify-content: space-between;
+  box-shadow:$shadow-low;
+  background-color: $color-paper;
 }
 
 .LineChart {
   flex: 3;
   height: 300px;
+  padding: 20px;
 }
 
 .CalculationOverview {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 @media (max-width: 992px) {
