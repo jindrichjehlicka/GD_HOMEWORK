@@ -1,23 +1,28 @@
 import { DataViewFacade } from "@gooddata/sdk-ui";
+//
+export type CalculationData = {
+    label: string;
+    values: string[]
+}
 
 interface UseCalculationOverviewData {
-    getMappedData: (data: DataViewFacade) => any;
+    getSlicedData: (data: DataViewFacade) => CalculationData[];
 }
 
 const useCalculationOverviewData = (): UseCalculationOverviewData => {
 
-    const getMappedData = (data: DataViewFacade): any => {
+    const getSlicedData = (data: DataViewFacade): CalculationData[] => {
         const slices = data?.data().slices().toArray();
         return slices?.map((slice) => {
             return {
                 label: slice.sliceTitles()[0],
-                ...slice.dataPoints().map((p) => p.rawValue),
+                values:slice.dataPoints().map(({formattedValue}) => formattedValue() || '')
             };
         });
     };
 
     return {
-        getMappedData,
+        getSlicedData,
     };
 };
 

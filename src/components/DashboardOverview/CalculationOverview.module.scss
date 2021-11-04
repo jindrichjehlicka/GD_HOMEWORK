@@ -6,13 +6,22 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 .Select {
   padding: $spacing;
   min-width: 300px;
 }
-.title{
+
+.titles {
   padding: $spacing;
-  margin: 0;
 }
 
+.error {
+  margin-right: $spacing * 2;
+}
+
+.h2 {
+  margin: 0;
+
+}
 

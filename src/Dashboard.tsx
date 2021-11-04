@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { LineChart } from "@gooddata/sdk-ui-charts";
-import CalculationOverview from "./CalculationOverview";
 import styles from "./Dashboard.module.scss";
-import { DateDatasets, Product, Revenue } from "../../md/full";
-import FilterBar, { DateFilterInfo } from "./FilterBar";
+import { DateDatasets, Product, Revenue } from "./md/full";
+import FilterBar, { DateFilterInfo } from "./components/DashboardOverview/FilterBar";
+import CalculationOverview from "./components/DashboardOverview/CalculationOverview";
 import dashboardStrings from "./dashboardStrings";
 
 

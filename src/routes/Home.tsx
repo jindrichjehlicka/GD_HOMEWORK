@@ -1,10 +1,9 @@
 import React from "react";
 
 import Page from "../components/Page";
-import Dashboard from "../components/Dashboard/Dashboard";
 const Home: React.FC = () => {
     return <Page>
-        <Dashboard/>
+        <h1>Welcome to Homepage</h1>
     </Page>;
 };
 

@@ -11,6 +11,7 @@ import Links from "./Links";
 import Aside from "./Aside";
 
 import styles from "./Header.module.scss";
+import ProtectedLinks from "./ProtectedLinks";
 
 const VerticalDelimiter: React.FC = ({ ...restProps }) => (
     <div className={styles.VerticalDelimiter} {...restProps} />
@@ -43,6 +44,8 @@ const BurgerMenu: React.FC = () => {
                         {/* <div className={styles.Centered}>
                             <WorkspacePicker />
                         </div> */}
+                        <ProtectedLinks />
+
                     </ProtectedItems>
                 </div>
             )}
@@ -81,15 +84,17 @@ const Header: React.FC = () => {
                 </>
             ) : (
                 <>
+
+                    <Logo />
+                    <VerticalDelimiter />
+                    <Links />
                     <ProtectedItems>
                         {/* Uncomment these lines to add a workspace picker into the menu */}
                         {/* <div className={`${styles.Centered} ${styles.Link}`}>
                             <WorkspacePicker />
                         </div> */}
+                        <ProtectedLinks />
                     </ProtectedItems>
-                    <Logo />
-                    <VerticalDelimiter />
-                    <Links />
                 </>
             )}
             <Aside />

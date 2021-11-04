@@ -11,14 +11,16 @@ interface StatusLoaderProps<T, U, S> {
     renderError?:(data: S) => ReactNode
 }
 
+//General component for handling view based on api state
 function StatusLoader<T, U, S>({ data, error, status, render,renderError }: StatusLoaderProps<T, U, S>): JSX.Element {
+
+    //Eventually there should be several types od loading components based on a use case
     if (status === "loading") {
         return <LoadingComponent />;
     }
 
     if (status === "error" && renderError) {
         return (renderError as unknown as (renderErrorData: S) => JSX.Element)(error as S);
-
     }
 
     if (status === "error" && !renderError) {
