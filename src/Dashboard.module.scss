@@ -1,0 +1,26 @@
+@import "./theme.scss";
+
+.Dashboard {
+  display: flex;
+  flex-direction: row;
+  margin: $spacing 0;
+  justify-content: space-between;
+  box-shadow:$shadow-low;
+  background-color: $color-paper;
+}
+
+.LineChart {
+  flex: 3;
+  height: 300px;
+  padding: 20px;
+}
+
+.CalculationOverview {
+  flex: 1;
+}
+
+@media (max-width: 992px) {
+  .Dashboard {
+    flex-direction: column;
+  }
+}
